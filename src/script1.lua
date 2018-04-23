@@ -79,6 +79,7 @@ local function temperature()
 		if status == dht.OK or status == dht.ERROR_CHECKSUM then
 			return temp
 		end
+		tmr.delay(1000)
 	end
 	return 20.0
 end

@@ -1,4 +1,14 @@
 require "config"
+-- Keep the linter quiet
+local gpio  = gpio
+local uart  = uart
+local wifi  = wifi
+local mqtt  = mqtt
+local tmr   = tmr
+local dht   = dht
+local sjson = sjson
+local MQTT  = MQTT
+local WIFI_CONFIG = WIFI_CONFIG
 
 local DEBUG           = true
 -- Pin assignments
@@ -74,8 +84,8 @@ local function setup()
 end
 
 local function temperature()
-	for i = 1, 10 do
-		local status, temp, humi, temp_dec, humi_dec = dht.read11(DHT_PIN)
+	for _ = 1, 10 do
+		local status, temp = dht.read11(DHT_PIN)
 		if status == dht.OK or status == dht.ERROR_CHECKSUM then
 			return temp
 		end

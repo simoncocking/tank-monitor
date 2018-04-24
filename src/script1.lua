@@ -39,10 +39,11 @@ local function sleep_radio()
 end
 
 local function wake_radio(and_then, ...)
+	local args = ...
 	gpio.write(RADIO_MODE_PIN, gpio.LOW)
 	do_in(1, function()
 		gpio.write(RADIO_MODE_PIN, gpio.HIGH)
-		and_then(...)
+		and_then(args)
 	end)
 end
 
